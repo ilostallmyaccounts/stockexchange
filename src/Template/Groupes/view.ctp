@@ -22,10 +22,10 @@
             <th scope="row"><?= __('Groupname') ?></th>
             <td><?= h($groupe->groupname) ?></td>
         </tr>
-        <tr>
+        <!--tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($groupe->id) ?></td>
-        </tr>
+        </tr-->
         <tr>
             <th scope="row"><?= __('Created') ?></th>
             <td><?= h($groupe->created) ?></td>

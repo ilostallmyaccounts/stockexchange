@@ -133,4 +133,22 @@ class UsersController extends AppController
 		$this->Flash->success(__('Vous avez été déconnecté.'));
 		return $this->redirect($this->Auth->logout());
 	}
+	
+	public function setFR()
+	{
+		I18n::setLocale('fr_FR');
+		$this->request->getSession()->write('Config.language', 'fr_FR');
+	}
+	
+	public function setEN()
+	{
+		I18n::setLocale('en_US');
+		$this->request->getSession()->write('Config.language', 'en_US');
+	}
+	
+	public function setDE()
+	{
+		I18n::setLocale('de_DE');
+		$this->request->getSession()->write('Config.language', 'de_DE');
+	}
 }

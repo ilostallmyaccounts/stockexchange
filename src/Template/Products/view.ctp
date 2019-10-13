@@ -24,10 +24,10 @@
             <th scope="row"><?= __('Name') ?></th>
             <td><?= h($product->name) ?></td>
         </tr>
-        <tr>
+        <!--tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($product->id) ?></td>
-        </tr>
+        </tr-->
         <tr>
             <th scope="row"><?= __('User Id') ?></th>
             <td><?= $this->Number->format($product->user_id) ?></td>

@@ -19,7 +19,7 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <!--th scope="col"><?= $this->Paginator->sort('id') ?></th-->
                 <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date_purchase') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
@@ -30,7 +30,7 @@
         <tbody>
             <?php foreach ($orders as $order): ?>
             <tr>
-                <td><?= $this->Number->format($order->id) ?></td>
+                <!--td><?= $this->Number->format($order->id) ?></td-->
                 <td><?= $order->has('user') ? $this->Html->link($order->user->id, ['controller' => 'Users', 'action' => 'view', $order->user->id]) : '' ?></td>
                 <td><?= h($order->date_purchase) ?></td>
                 <td><?= h($order->created) ?></td>

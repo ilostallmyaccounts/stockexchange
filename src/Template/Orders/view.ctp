@@ -24,10 +24,10 @@
             <th scope="row"><?= __('User') ?></th>
             <td><?= $order->has('user') ? $this->Html->link($order->user->id, ['controller' => 'Users', 'action' => 'view', $order->user->id]) : '' ?></td>
         </tr>
-        <tr>
+        <!--tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($order->id) ?></td>
-        </tr>
+        </tr-->
         <tr>
             <th scope="row"><?= __('Date Purchase') ?></th>
             <td><?= h($order->date_purchase) ?></td>

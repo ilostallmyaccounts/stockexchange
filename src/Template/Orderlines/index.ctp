@@ -19,7 +19,7 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <!--th scope="col"><?= $this->Paginator->sort('id') ?></th-->
                 <th scope="col"><?= $this->Paginator->sort('order_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('product_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('quantity') ?></th>
@@ -31,7 +31,7 @@
         <tbody>
             <?php foreach ($orderlines as $orderline): ?>
             <tr>
-                <td><?= $this->Number->format($orderline->id) ?></td>
+                <!--td><?= $this->Number->format($orderline->id) ?></td-->
                 <td><?= $orderline->has('order') ? $this->Html->link($orderline->order->id, ['controller' => 'Orders', 'action' => 'view', $orderline->order->id]) : '' ?></td>
                 <td><?= $orderline->has('product') ? $this->Html->link($orderline->product->name, ['controller' => 'Products', 'action' => 'view', $orderline->product->id]) : '' ?></td>
                 <td><?= $this->Number->format($orderline->quantity) ?></td>

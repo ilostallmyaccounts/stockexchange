@@ -21,12 +21,12 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <!--th scope="col"><?= $this->Paginator->sort('id') ?></th-->
                 <th scope="col"><?= $this->Paginator->sort('firstname') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('lastname') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('email') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('phone') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('password') ?></th>
+                <!--th scope="col"><?= $this->Paginator->sort('password') ?></th-->
                 <th scope="col"><?= $this->Paginator->sort('isadmin') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('joindate') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
@@ -37,12 +37,12 @@
         <tbody>
             <?php foreach ($users as $user): ?>
             <tr>
-                <td><?= $this->Number->format($user->id) ?></td>
+                <!--td><?= $this->Number->format($user->id) ?></td-->
                 <td><?= h($user->firstname) ?></td>
                 <td><?= h($user->lastname) ?></td>
                 <td><?= h($user->email) ?></td>
                 <td><?= h($user->phone) ?></td>
-                <td><?= h($user->password) ?></td>
+                <!--td><?= h($user->password) ?></td-->
                 <td><?= h($user->isadmin) ?></td>
                 <td><?= h($user->joindate) ?></td>
                 <td><?= h($user->created) ?></td>

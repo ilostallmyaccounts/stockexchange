@@ -38,10 +38,10 @@
             <th scope="row"><?= __('Phone') ?></th>
             <td><?= h($user->phone) ?></td>
         </tr>
-        <tr>
+        <!--tr>
             <th scope="row"><?= __('Password') ?></th>
             <td><?= h($user->password) ?></td>
-        </tr>
+        </tr-->
         <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($user->id) ?></td>
@@ -78,7 +78,7 @@
             </tr>
             <?php foreach ($user->products as $products): ?>
             <tr>
-                <td><?= h($products->id) ?></td>
+                <!--td><?= h($products->id) ?></td-->
                 <td><?= h($products->name) ?></td>
                 <td><?= h($products->user_id) ?></td>
                 <td><?= h($products->price) ?></td>

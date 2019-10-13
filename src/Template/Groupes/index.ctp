@@ -17,7 +17,7 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <!--th scope="col"><?= $this->Paginator->sort('id') ?></th-->
                 <th scope="col"><?= $this->Paginator->sort('groupname') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
@@ -27,7 +27,7 @@
         <tbody>
             <?php foreach ($groupes as $groupe): ?>
             <tr>
-                <td><?= $this->Number->format($groupe->id) ?></td>
+                <!--td><?= $this->Number->format($groupe->id) ?></td-->
                 <td><?= h($groupe->groupname) ?></td>
                 <td><?= h($groupe->created) ?></td>
                 <td><?= h($groupe->modified) ?></td>

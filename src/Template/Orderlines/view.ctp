@@ -28,10 +28,10 @@
             <th scope="row"><?= __('Product') ?></th>
             <td><?= $orderline->has('product') ? $this->Html->link($orderline->product->name, ['controller' => 'Products', 'action' => 'view', $orderline->product->id]) : '' ?></td>
         </tr>
-        <tr>
+        <!--tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($orderline->id) ?></td>
-        </tr>
+        </tr-->
         <tr>
             <th scope="row"><?= __('Quantity') ?></th>
             <td><?= $this->Number->format($orderline->quantity) ?></td>

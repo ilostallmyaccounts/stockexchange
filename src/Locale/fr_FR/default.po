@@ -15,6 +15,14 @@ msgstr ""
 "Last-Translator: \n"
 "Language: fr\n"
 
+
+msgid "French"
+msgstr "Français"
+msgid "English"
+msgstr "Anglais"
+msgid "German"
+msgstr "Allemand"
+
 #: Controller/GroupesController.php:54 Controller/GroupesController.php:79
 msgid "The groupe has been saved."
 msgstr "Le groupe a été enregistré."

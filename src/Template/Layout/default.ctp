@@ -42,6 +42,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </ul>
         <div class="top-bar-section">
             <ul class="right">
+				<li><?= $this->Html->link(__('French'), ['controller' => 'Users', 'action' => 'setFR']); ?></li>
+				<li><?= $this->Html->link(__('English'), ['controller' => 'Users', 'action' => 'setEN']); ?></li>
+				<li><?= $this->Html->link(__('German'), ['controller' => 'Users', 'action' => 'setDE']); ?></li>
                 <?php
 					$loguser = $this->request->session()->read('Auth.User');
 					 if ($loguser) {
