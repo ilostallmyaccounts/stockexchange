@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use Cake\I18n\I18n;
 use App\Controller\AppController;
 
 /**
@@ -122,14 +123,14 @@ class UsersController extends AppController
 				$this->Auth->setUser($user);
 				return $this->redirect($this->Auth->redirectUrl());
 			}
-			$this->Flash->error('Votre identifiant ou votre mot de passe est incorrect.');
+			$this->Flash->error(__('Votre identifiant ou votre mot de passe est incorrect.'));
 		}
 	}
 	
 	
 	public function logout()
 	{
-		$this->Flash->success('Vous avez été déconnecté.');
+		$this->Flash->success(__('Vous avez été déconnecté.'));
 		return $this->redirect($this->Auth->logout());
 	}
 }

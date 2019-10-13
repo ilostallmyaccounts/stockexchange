@@ -45,6 +45,8 @@ class GroupesTable extends Table
             'targetForeignKey' => 'user_id',
             'joinTable' => 'users_groupes'
         ]);
+		
+		$this->addBehavior('Translate', ['fields' => ['groupname']]);
     }
 
     /**
