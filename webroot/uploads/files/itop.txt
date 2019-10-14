@@ -1,0 +1,9 @@
+Avantages
+- Intuitif, étape-par-étape
+- Flexible, bon pour plusieurs types d'entreprises (Entreprise vs service provider)
+- Gratuit et open-source, facile à adapter à ses besoins
+
+Désavantages
+- Pas de support provenant de la comagnie auteur de iTop (Combodo) (possible d'obtenir du support payant)
+- Ne peut pas gérer les coûts associés aux interventions
+- 

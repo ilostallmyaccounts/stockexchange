@@ -12,6 +12,19 @@ use App\Controller\AppController;
  */
 class ProductsController extends AppController
 {
+    public function initialize(){
+        parent::initialize();
+        
+        // Include the FlashComponent
+        $this->loadComponent('Flash');
+        
+        // Load Files model
+        $this->loadModel('Files');
+        
+        // Set the layout
+        //$this->layout = 'frontend';
+    }
+	
     /**
      * Index method
      *
