@@ -34,7 +34,7 @@
                 <!--td><?= $this->Number->format($product->id) ?></td-->
                 <td><?= h($product->name) ?></td>
                 <td><?= $this->Number->format($product->user_id) ?></td>
-                <td><?= $this->Number->format($product->price) ?></td>
+                <td>$ <?= $this->Number->format($product->price) ?></td>
                 <td><?= h($product->created) ?></td>
                 <td><?= h($product->modified) ?></td>
                 <td class="actions">

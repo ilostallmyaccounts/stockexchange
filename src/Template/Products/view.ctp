@@ -34,7 +34,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Price') ?></th>
-            <td><?= $this->Number->format($product->price) ?></td>
+            <td>$ <?= $this->Number->format($product->price) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
