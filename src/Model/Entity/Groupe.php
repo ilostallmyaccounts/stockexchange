@@ -8,9 +8,11 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $groupname
+ * @property int|null $file_id
  * @property \Cake\I18n\FrozenDate|null $created
  * @property \Cake\I18n\FrozenDate|null $modified
  *
+ * @property \App\Model\Entity\File $file
  * @property \App\Model\Entity\User[] $users
  */
 class Groupe extends Entity
@@ -26,8 +28,10 @@ class Groupe extends Entity
      */
     protected $_accessible = [
         'groupname' => true,
+        'file_id' => true,
         'created' => true,
         'modified' => true,
+        'file' => true,
         'users' => true
     ];
 }

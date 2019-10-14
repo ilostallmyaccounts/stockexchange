@@ -24,6 +24,7 @@ class GroupesTableTest extends TestCase
      */
     public $fixtures = [
         'app.Groupes',
+        'app.Files',
         'app.Users'
     ];
 
@@ -67,6 +68,16 @@ class GroupesTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

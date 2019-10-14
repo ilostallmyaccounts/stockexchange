@@ -8,6 +8,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Groupe'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
@@ -19,6 +21,7 @@
             <tr>
                 <!--th scope="col"><?= $this->Paginator->sort('id') ?></th-->
                 <th scope="col"><?= $this->Paginator->sort('groupname') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('file_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -29,6 +32,7 @@
             <tr>
                 <!--td><?= $this->Number->format($groupe->id) ?></td-->
                 <td><?= h($groupe->groupname) ?></td>
+                <td><?= $groupe->has('file') ? $this->Html->link($groupe->file->name, ['controller' => 'Files', 'action' => 'view', $groupe->file->id]) : '' ?></td>
                 <td><?= h($groupe->created) ?></td>
                 <td><?= h($groupe->modified) ?></td>
                 <td class="actions">

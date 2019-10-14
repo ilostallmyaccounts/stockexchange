@@ -9,6 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Groupes Model
  *
+ * @property \App\Model\Table\FilesTable&\Cake\ORM\Association\BelongsTo $Files
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsToMany $Users
  *
  * @method \App\Model\Entity\Groupe get($primaryKey, $options = [])
@@ -40,13 +41,14 @@ class GroupesTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->belongsTo('Files', [
+            'foreignKey' => 'file_id'
+        ]);
         $this->belongsToMany('Users', [
             'foreignKey' => 'groupe_id',
             'targetForeignKey' => 'user_id',
             'joinTable' => 'users_groupes'
         ]);
-		
-		$this->addBehavior('Translate', ['fields' => ['groupname']]);
     }
 
     /**
@@ -68,5 +70,19 @@ class GroupesTable extends Table
             ->notEmptyString('groupname');
 
         return $validator;
+    }
+
+    /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->existsIn(['file_id'], 'Files'));
+
+        return $rules;
     }
 }

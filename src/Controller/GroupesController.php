@@ -19,6 +19,9 @@ class GroupesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Files']
+        ];
         $groupes = $this->paginate($this->Groupes);
 
         $this->set(compact('groupes'));
@@ -34,7 +37,7 @@ class GroupesController extends AppController
     public function view($id = null)
     {
         $groupe = $this->Groupes->get($id, [
-            'contain' => ['Users']
+            'contain' => ['Files', 'Users']
         ]);
 
         $this->set('groupe', $groupe);
@@ -57,8 +60,9 @@ class GroupesController extends AppController
             }
             $this->Flash->error(__('The groupe could not be saved. Please, try again.'));
         }
+        $files = $this->Groupes->Files->find('list', ['limit' => 200]);
         $users = $this->Groupes->Users->find('list', ['limit' => 200]);
-        $this->set(compact('groupe', 'users'));
+        $this->set(compact('groupe', 'files', 'users'));
     }
 
     /**
@@ -82,8 +86,9 @@ class GroupesController extends AppController
             }
             $this->Flash->error(__('The groupe could not be saved. Please, try again.'));
         }
+        $files = $this->Groupes->Files->find('list', ['limit' => 200]);
         $users = $this->Groupes->Users->find('list', ['limit' => 200]);
-        $this->set(compact('groupe', 'users'));
+        $this->set(compact('groupe', 'files', 'users'));
     }
 
     /**

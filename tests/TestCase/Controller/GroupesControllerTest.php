@@ -21,6 +21,7 @@ class GroupesControllerTest extends TestCase
      */
     public $fixtures = [
         'app.Groupes',
+        'app.Files',
         'app.Users',
         'app.UsersGroupes'
     ];

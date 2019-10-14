@@ -11,6 +11,8 @@
         <li><?= $this->Form->postLink(__('Delete Groupe'), ['action' => 'delete', $groupe->id], ['confirm' => __('Are you sure you want to delete # {0}?', $groupe->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Groupes'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Groupe'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New File'), ['controller' => 'Files', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
     </ul>
@@ -21,6 +23,10 @@
         <tr>
             <th scope="row"><?= __('Groupname') ?></th>
             <td><?= h($groupe->groupname) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('File') ?></th>
+            <td><?= $groupe->has('file') ? $this->Html->link($groupe->file->name, ['controller' => 'Files', 'action' => 'view', $groupe->file->id]) : '' ?></td>
         </tr>
         <!--tr>
             <th scope="row"><?= __('Id') ?></th>
