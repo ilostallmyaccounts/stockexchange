@@ -5,6 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\ORM\Behavior\TranslateBehavior;
 
 /**
  * Products Model
@@ -35,7 +36,7 @@ class ProductsTable extends Table
     public function initialize(array $config)
     {
         parent::initialize($config);
-
+		
         $this->setTable('products');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');

@@ -64,7 +64,7 @@ class UsersController extends AppController
 			$user->admin = false;
             if ($this->Users->save($user)) {
 				$email = new Email('default');
-				$email->to('stockexchange@localhost')->from('stockexchange@localhost')->subject(__('Confirm email'))->send(__('Please confirm your email') . "\r\n\r\n http://localhost/stockexchange/users/valider/" . $user['id'] . '.' . $text);
+				$email->to($user['email'])->from('stockexchange@localhost')->subject(__('Confirm email'))->send(__('Please confirm your email') . "\r\n\r\n http://localhost/stockexchange/users/valider/" . $user['id'] . '.' . $text);
                 $this->Flash->success(__('The user has been saved.').' '.__('Please validate your email.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -165,7 +165,7 @@ class UsersController extends AppController
 		$validKey = $params[1];
 		
 		
-		$user = $this->Users->get(intval($id));
+		$user = $this->Users->get(intval($userId));
 		if ($user['validation'] == $validKey) {
 			$user['isadmin'] = true;
 			$user['validation'] = '';
