@@ -22,6 +22,8 @@ use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\Routing\Route\DashedRoute;
 
+use Cake\Core\Plugin;
+
 /**
  * The default class to use for all routes
  *
@@ -90,6 +92,13 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->fallbacks(DashedRoute::class);
 });
+
+Router::defaultRouteClass('DashedRoute');
+Router::scope('/', function (RouteBuilder $routes) {
+	$routes->connect('/email',['controller'=>'Emails','action'=>'index']);
+	$routes->fallbacks('DashedRoute');
+});
+Plugin::routes();
 
 /**
  * If you need a different set of middleware or none at all,

@@ -16,6 +16,12 @@ msgstr ""
 "Language: fr\n"
 
 
+msgid "Confirm email"
+msgstr "Confirmez votre email"
+msgid "Please confirm your email"
+msgstr "Veuillez confirmer votre email en cliquant sur le lien ci-dessous :"
+
+
 msgid "French"
 msgstr "Français"
 msgid "English"
