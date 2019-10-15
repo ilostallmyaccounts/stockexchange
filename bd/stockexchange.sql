@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 14 oct. 2019 à 01:49
+-- Généré le :  mar. 15 oct. 2019 à 05:08
 -- Version du serveur :  10.1.40-MariaDB
 -- Version de PHP :  7.3.5
 
@@ -37,6 +37,16 @@ CREATE TABLE `files` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1 = Active, 0 = Inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `files`
+--
+
+INSERT INTO `files` (`id`, `name`, `path`, `created`, `modified`, `status`) VALUES
+(1, 'itop.txt', 'uploads/files/', '2019-10-14 00:27:21', '2019-10-14 00:27:21', 1),
+(2, 'e.html', 'uploads/files/', '2019-10-14 00:48:11', '2019-10-14 00:48:11', 1),
+(3, '6b0c7491d0776cf40dc0f455b937edf8.jpg', 'uploads/files/', '2019-10-14 00:52:18', '2019-10-14 00:52:18', 1),
+(4, 'YYKGVl2.jpg', 'uploads/files/', '2019-10-14 01:02:52', '2019-10-14 01:02:52', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +56,7 @@ CREATE TABLE `files` (
 CREATE TABLE `groupes` (
   `id` int(11) NOT NULL,
   `groupname` varchar(32) NOT NULL,
+  `file_id` int(11) DEFAULT NULL,
   `created` date DEFAULT NULL,
   `modified` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -54,8 +65,8 @@ CREATE TABLE `groupes` (
 -- Déchargement des données de la table `groupes`
 --
 
-INSERT INTO `groupes` (`id`, `groupname`, `created`, `modified`) VALUES
-(1, 'Test', '2019-10-13', '2019-10-13');
+INSERT INTO `groupes` (`id`, `groupname`, `file_id`, `created`, `modified`) VALUES
+(1, 'Test', 4, '2019-10-13', '2019-10-14');
 
 -- --------------------------------------------------------
 
@@ -71,6 +82,13 @@ CREATE TABLE `i18n` (
   `field` varchar(255) NOT NULL,
   `content` text
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `i18n`
+--
+
+INSERT INTO `i18n` (`id`, `locale`, `model`, `foreign_key`, `field`, `content`) VALUES
+(1, 'fr_FR', 'Products', 2, 'name', 'Test (en français)');
 
 -- --------------------------------------------------------
 
@@ -148,6 +166,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `isadmin` tinyint(1) NOT NULL DEFAULT '0',
   `joindate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `validation` varchar(255) DEFAULT NULL,
   `created` date DEFAULT NULL,
   `modified` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -156,9 +175,9 @@ CREATE TABLE `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `phone`, `password`, `isadmin`, `joindate`, `created`, `modified`) VALUES
-(1, 'Jean', 'Robert', 'jr@jr.jr', '1234567890', '$2y$10$mVrhM.ees.NW7Z4WH2j1MeNUB7p7v/ndAGxm12.M8M6PLfJeBzocK', 0, '2019-10-12 23:53:00', '2019-10-12', '2019-10-13'),
-(3, 'Charlie', 'Root', 'root@jr.jr', '1234567890', '$2y$10$BB2KIMus4z1COw1pdcIMXeCbX/2W4mjJHgirNMtbrh5XPziorDP9G', 1, '2019-10-12 23:55:00', '2019-10-12', '2019-10-12');
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `phone`, `password`, `isadmin`, `joindate`, `validation`, `created`, `modified`) VALUES
+(1, 'Jean', 'Robert', 'jr@jr.jr', '1234567890', '$2y$10$mVrhM.ees.NW7Z4WH2j1MeNUB7p7v/ndAGxm12.M8M6PLfJeBzocK', 0, '2019-10-12 23:53:00', NULL, '2019-10-12', '2019-10-13'),
+(3, 'Charlie', 'Root', 'root@jr.jr', '1234567890', '$2y$10$BB2KIMus4z1COw1pdcIMXeCbX/2W4mjJHgirNMtbrh5XPziorDP9G', 1, '2019-10-12 23:55:00', NULL, '2019-10-12', '2019-10-12');
 
 -- --------------------------------------------------------
 
@@ -210,7 +229,8 @@ ALTER TABLE `files`
 -- Index pour la table `groupes`
 --
 ALTER TABLE `groupes`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `file_id` (`file_id`);
 
 --
 -- Index pour la table `i18n`
@@ -272,7 +292,7 @@ ALTER TABLE `users_products`
 -- AUTO_INCREMENT pour la table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `groupes`
@@ -284,7 +304,7 @@ ALTER TABLE `groupes`
 -- AUTO_INCREMENT pour la table `i18n`
 --
 ALTER TABLE `i18n`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `orderlines`
@@ -308,7 +328,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `users_groupes`
@@ -325,6 +345,12 @@ ALTER TABLE `users_products`
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `groupes`
+--
+ALTER TABLE `groupes`
+  ADD CONSTRAINT `groupes_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`);
 
 --
 -- Contraintes pour la table `orderlines`
