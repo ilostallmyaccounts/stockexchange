@@ -52,8 +52,8 @@ class OrdersController extends AppController
     {
         $order = $this->Orders->newEntity();
         if ($this->request->is('post')) {
-			$order->user_id = $this->Auth->user('id');
             $order = $this->Orders->patchEntity($order, $this->request->getData());
+			$order->user_id = $this->Auth->user('id');
             if ($this->Orders->save($order)) {
                 $this->Flash->success(__('The order has been saved.'));
 

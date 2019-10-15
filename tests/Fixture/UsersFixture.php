@@ -23,6 +23,7 @@ class UsersFixture extends TestFixture
         'password' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'isadmin' => ['type' => 'boolean', 'length' => null, 'null' => false, 'default' => '0', 'comment' => '', 'precision' => null],
         'joindate' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
+        'validation' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'created' => ['type' => 'date', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'date', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         '_constraints' => [
@@ -50,9 +51,10 @@ class UsersFixture extends TestFixture
                 'phone' => 'Lorem ip',
                 'password' => 'Lorem ipsum dolor sit amet',
                 'isadmin' => 1,
-                'joindate' => '2019-10-12 23:37:10',
-                'created' => '2019-10-12',
-                'modified' => '2019-10-12'
+                'joindate' => '2019-10-15 01:54:45',
+                'validation' => 'Lorem ipsum dolor sit amet',
+                'created' => '2019-10-15',
+                'modified' => '2019-10-15'
             ],
         ];
         parent::init();

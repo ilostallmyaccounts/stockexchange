@@ -26,7 +26,7 @@
             echo $this->Form->control('email');
             echo $this->Form->control('phone');
             echo $this->Form->control('password');
-            echo $this->Form->control('isadmin');
+        //  echo $this->Form->control('isadmin');
         //  echo $this->Form->control('joindate');
             echo $this->Form->control('products._ids', ['options' => $products]);
             echo $this->Form->control('groupes._ids', ['options' => $groupes]);

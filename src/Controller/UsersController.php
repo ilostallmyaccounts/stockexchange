@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use Cake\I18n\I18n;
 use App\Controller\AppController;
+use Cake\Mailer\Email;
+use Cake\Utility\Text;
 
 /**
  * Users Controller
@@ -56,9 +58,14 @@ class UsersController extends AppController
     {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
+			$text = Text::uuid();
             $user = $this->Users->patchEntity($user, $this->request->getData());
+			$user->validation = $text;
+			$user->admin = false;
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+				$email = new Email('default');
+				$email->to('stockexchange@localhost')->from('stockexchange@localhost')->subject(__('Confirm email'))->send(__('Please confirm your email') . "\r\n\r\n http://localhost/stockexchange/users/valider/" . $user['id'] . '.' . $text);
+                $this->Flash->success(__('The user has been saved.').' '.__('Please validate your email.'));
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -150,5 +157,24 @@ class UsersController extends AppController
 	{
 		I18n::setLocale('de_DE');
 		$this->request->getSession()->write('Config.language', 'de_DE');
+	}
+	
+	public function valider($id = null){
+		$params = explode('.', $id);
+		$userId = $params[0];
+		$validKey = $params[1];
+		
+		
+		$user = $this->Users->get(intval($id));
+		if ($user['validation'] == $validKey) {
+			$user['isadmin'] = true;
+			$user['validation'] = '';
+			if ($this->Users->save($user)) {
+				$this->Flash->success(__('The user has been saved.'));
+				return;
+			}
+			$this->Flash->error(__('The user could not be saved. Please, try again.'));
+		}
+		$this->Flash->error(__('The validation token is invalid.'));
 	}
 }

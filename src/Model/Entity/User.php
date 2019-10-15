@@ -41,6 +41,7 @@ class User extends Entity
         'password' => true,
         'isadmin' => true,
         'joindate' => true,
+		'validation' => true,
         'created' => true,
         'modified' => true,
         'orders' => true,

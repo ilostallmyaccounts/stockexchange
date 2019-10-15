@@ -110,6 +110,11 @@ class UsersTable extends Table
             ->dateTime('joindate')
             ->notEmptyDateTime('joindate');
 
+        $validator
+            ->scalar('validation')
+            ->maxLength('validation', 255)
+            ->allowEmptyString('validation');
+
         return $validator;
     }
 
