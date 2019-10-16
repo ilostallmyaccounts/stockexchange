@@ -5,6 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\ORM\Behavior\TranslateBehavior;
 
 /**
  * Groupes Model
@@ -34,13 +35,13 @@ class GroupesTable extends Table
     public function initialize(array $config)
     {
         parent::initialize($config);
-
+		
         $this->setTable('groupes');
-        $this->setDisplayField('id');
+        $this->setDisplayField('groupname');
         $this->setPrimaryKey('id');
-
+		
         $this->addBehavior('Timestamp');
-
+		
         $this->belongsTo('Files', [
             'foreignKey' => 'file_id'
         ]);
@@ -49,6 +50,8 @@ class GroupesTable extends Table
             'targetForeignKey' => 'user_id',
             'joinTable' => 'users_groupes'
         ]);
+		
+		$this->addBehavior('Translate', ['fields' => ['groupname']]);
     }
 
     /**
