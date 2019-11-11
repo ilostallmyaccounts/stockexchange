@@ -1,4 +1,13 @@
 <?php
+$urlToGroupesAutocompleteJson = $this->Url->build([
+    "controller" => "Groupes",
+    "action" => "findGroupe",
+    "_ext" => "json"
+]);
+echo $this->Html->scriptBlock('var urlToAutocompleteAction = "' . $urlToGroupesAutocompleteJson . '";', ['block' => true]);
+echo $this->Html->script('Groupes/autocomplete', ['block' => 'scriptBottom']);
+?>
+<?php
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Groupe[]|\Cake\Collection\CollectionInterface $groupes
@@ -16,6 +25,14 @@
 </nav>
 <div class="groupes index large-9 medium-8 columns content">
     <h3><?= __('Groupes') ?></h3>
+	<?= $this->Form->create('Groupes') ?>
+	<fieldset>
+		<legend><?= __('Search Groupe') ?></legend>
+		<?php
+		echo $this->Form->input('name', ['id' => 'autocomplete']);
+		?>
+	</fieldset>
+	<?= $this->Form->end() ?>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>

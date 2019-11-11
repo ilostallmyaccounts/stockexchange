@@ -28,6 +28,30 @@ class GroupesController extends AppController
     }
 
     /**
+     * findCar method
+     * for use with JQuery-UI Autocomplete
+     *
+     * @return JSon query result
+     */
+    public function findGroupe() {
+
+        if ($this->request->is('ajax')) {
+
+            $this->autoRender = false;
+            $name = $this->request->query['term'];
+            $results = $this->Groupes->find('all', array(
+                'conditions' => array('Groupes.groupname LIKE ' => '%' . $name . '%')
+            ));
+
+            $resultArr = array();
+            foreach ($results as $result) {
+                $resultArr[] = array('label' => $result['name'], 'value' => $result['groupname']);
+            }
+            echo json_encode($resultArr);
+        }
+    }
+
+    /**
      * View method
      *
      * @param string|null $id Groupe id.
