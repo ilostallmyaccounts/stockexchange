@@ -11,8 +11,14 @@
         <li><?= $this->Form->postLink(__('Delete Product'), ['action' => 'delete', $product->id], ['confirm' => __('Are you sure you want to delete # {0}?', $product->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Products'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Product'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Types'), ['controller' => 'Types', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Type'), ['controller' => 'Types', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Products Name Translation'), ['controller' => 'Products_name_translation', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Products Name Translation'), ['controller' => 'Products_name_translation', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Orderlines'), ['controller' => 'Orderlines', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Orderline'), ['controller' => 'Orderlines', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List I18n'), ['controller' => 'I18n', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New I18n'), ['controller' => 'I18n', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
     </ul>
@@ -23,6 +29,14 @@
         <tr>
             <th scope="row"><?= __('Name') ?></th>
             <td><?= h($product->name) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Type') ?></th>
+            <td><?= $product->has('type') ? $this->Html->link($product->type->name, ['controller' => 'Types', 'action' => 'view', $product->type->id]) : '' ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Products Name Translation') ?></th>
+            <td><?= $product->has('name_translation') ? $this->Html->link($product->name_translation->id, ['controller' => 'Products_name_translation', 'action' => 'view', $product->name_translation->id]) : '' ?></td>
         </tr>
         <!--tr>
             <th scope="row"><?= __('Id') ?></th>
@@ -50,7 +64,7 @@
         <?php if (!empty($product->users)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <th scope="col"><?= __('Id') ?></th>
+                <!--th scope="col"><?= __('Id') ?></th-->
                 <th scope="col"><?= __('Firstname') ?></th>
                 <th scope="col"><?= __('Lastname') ?></th>
                 <th scope="col"><?= __('Email') ?></th>
@@ -58,13 +72,14 @@
                 <th scope="col"><?= __('Password') ?></th>
                 <th scope="col"><?= __('Isadmin') ?></th>
                 <th scope="col"><?= __('Joindate') ?></th>
+                <th scope="col"><?= __('Validation') ?></th>
                 <th scope="col"><?= __('Created') ?></th>
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($product->users as $users): ?>
             <tr>
-                <td><?= h($users->id) ?></td>
+                <!--td><?= h($users->id) ?></td-->
                 <td><?= h($users->firstname) ?></td>
                 <td><?= h($users->lastname) ?></td>
                 <td><?= h($users->email) ?></td>
@@ -72,6 +87,7 @@
                 <td><?= h($users->password) ?></td>
                 <td><?= h($users->isadmin) ?></td>
                 <td><?= h($users->joindate) ?></td>
+                <td><?= h($users->validation) ?></td>
                 <td><?= h($users->created) ?></td>
                 <td><?= h($users->modified) ?></td>
                 <td class="actions">
@@ -89,7 +105,7 @@
         <?php if (!empty($product->orderlines)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <th scope="col"><?= __('Id') ?></th>
+                <!--th scope="col"><?= __('Id') ?></th-->
                 <th scope="col"><?= __('Order Id') ?></th>
                 <th scope="col"><?= __('Product Id') ?></th>
                 <th scope="col"><?= __('Quantity') ?></th>
@@ -99,7 +115,7 @@
             </tr>
             <?php foreach ($product->orderlines as $orderlines): ?>
             <tr>
-                <td><?= h($orderlines->id) ?></td>
+                <!--td><?= h($orderlines->id) ?></td-->
                 <td><?= h($orderlines->order_id) ?></td>
                 <td><?= h($orderlines->product_id) ?></td>
                 <td><?= h($orderlines->quantity) ?></td>

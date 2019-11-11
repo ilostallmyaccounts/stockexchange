@@ -24,6 +24,8 @@ use Cake\Routing\Route\DashedRoute;
 
 use Cake\Core\Plugin;
 
+Router::extensions(['json', 'xml']);
+
 /**
  * The default class to use for all routes
  *
@@ -49,6 +51,7 @@ Router::defaultRouteClass(DashedRoute::class);
 
 Router::scope('/', function (RouteBuilder $routes) {
     // Register scoped middleware for in scopes.
+	$routes->setExtensions(['json', 'xml']);
     $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware([
         'httpOnly' => true
     ]));
@@ -90,14 +93,16 @@ Router::scope('/', function (RouteBuilder $routes) {
      * You can remove these routes once you've connected the
      * routes you want in your application.
      */
+	$routes->connect('/email',['controller'=>'Emails','action'=>'index']);
     $routes->fallbacks(DashedRoute::class);
 });
 
-Router::defaultRouteClass('DashedRoute');
+/*Router::defaultRouteClass('DashedRoute');
 Router::scope('/', function (RouteBuilder $routes) {
 	$routes->connect('/email',['controller'=>'Emails','action'=>'index']);
 	$routes->fallbacks('DashedRoute');
-});
+	$routes->setExtensions(['json', 'xml']);
+});*/
 Plugin::routes();
 
 /**

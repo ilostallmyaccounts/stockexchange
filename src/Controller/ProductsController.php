@@ -12,19 +12,18 @@ use App\Controller\AppController;
  */
 class ProductsController extends AppController
 {
-    public function initialize(){
+	public function initialize(){
         parent::initialize();
-        
+
         // Include the FlashComponent
         $this->loadComponent('Flash');
-        
+
         // Load Files model
         $this->loadModel('Files');
-        
+
         // Set the layout
         //$this->layout = 'frontend';
     }
-	
     /**
      * Index method
      *
@@ -32,6 +31,9 @@ class ProductsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Types']
+        ];
         $products = $this->paginate($this->Products);
 
         $this->set(compact('products'));
@@ -47,7 +49,7 @@ class ProductsController extends AppController
     public function view($id = null)
     {
         $product = $this->Products->get($id, [
-            'contain' => ['Users', 'Orderlines']
+            'contain' => ['Types', 'Users', 'Orderlines',]
         ]);
 
         $this->set('product', $product);
@@ -73,8 +75,23 @@ class ProductsController extends AppController
             }
             $this->Flash->error(__('The product could not be saved. Please, try again.'));
         }
+        // Bâtir la liste des catégories  
+        $this->loadModel('Classifications');
+        $classifications = $this->Classifications->find('list', ['limit' => 200]);
+
+        // Extraire le id de la première catégorie
+        $classifications = $classifications->toArray();
+        reset($classifications);
+        $classification_id = key($classifications);
+
+        // Bâtir la liste des sous-catégories reliées à cette catégorie
+        $types = $this->Products->Types->find('list', [
+            'conditions' => ['Types.classification_id' => $classification_id],
+        ]);
+		
+        //$types = $this->Products->Types->find('list', ['limit' => 200]);
         $users = $this->Products->Users->find('list', ['limit' => 200]);
-        $this->set(compact('product', 'users'));
+        $this->set(compact('product', 'types', 'users', 'classifications'));
     }
 
     /**
@@ -98,8 +115,23 @@ class ProductsController extends AppController
             }
             $this->Flash->error(__('The product could not be saved. Please, try again.'));
         }
+        // Bâtir la liste des catégories  
+        $this->loadModel('Classifications');
+        $classifications = $this->Classifications->find('list', ['limit' => 200]);
+
+        // Extraire le id de la première catégorie
+        $classifications = $classifications->toArray();
+        reset($classifications);
+        $classification_id = key($classifications);
+
+        // Bâtir la liste des sous-catégories reliées à cette catégorie
+        $types = $this->Products->Types->find('list', [
+            'conditions' => ['Types.classification_id' => $classification_id],
+        ]);
+		
+        $types = $this->Products->Types->find('list', ['limit' => 200]);
         $users = $this->Products->Users->find('list', ['limit' => 200]);
-        $this->set(compact('product', 'users'));
+        $this->set(compact('product', 'types', 'users', 'classifications'));
     }
 
     /**
@@ -118,24 +150,35 @@ class ProductsController extends AppController
         } else {
             $this->Flash->error(__('The product could not be deleted. Please, try again.'));
         }
-		
+
         return $this->redirect(['action' => 'index']);
     }
 	
 	public function isAuthorized($user)
-	{
-		$action = $this->request->getParam('action');
-		if (in_array($action, ['add'])) {
-			return true;
-		}
-		
-		$id = $this->request->getParam('pass.0');
-		if (!$id) {
-			return false;
-		}
-		
-		$product = $this->Products->get($id);
-		
-		return $product->user_id === $user['id'] || $user['isadmin'] === true;
-	}
+       {
+               $action = $this->request->getParam('action');
+               if (in_array($action, ['add'])) {
+                       return true;
+               }
+
+               $id = $this->request->getParam('pass.0');
+               if (!$id) {
+                       return false;
+               }
+
+               $product = $this->Products->get($id);
+
+               return $product->user_id === $user['id'] || $user['isadmin'] === true;
+    }
+	
+    public function getByClassification() {
+        $classification_id = $this->request->query('classification_id');
+
+        $types = $this->Types->find('all', [
+            'conditions' => ['Types.classification_id' => $classification_id],
+        ]);
+        $this->set('types', $types);
+        $this->set('_serialize', ['types']);
+		return "eee";
+    }
 }

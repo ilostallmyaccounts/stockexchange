@@ -28,10 +28,25 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('style.css') ?>
+	
+    <?php
+    echo $this->Html->css([
+        'base.css',
+        'style.css',
+        'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'
+    ]);
+    echo $this->Html->script([
+			'https://code.jquery.com/jquery-1.12.4.js',
+			'https://code.jquery.com/ui/1.12.1/jquery-ui.js'
+        ], ['block' => 'scriptLibraries']
+    );
+    ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+	
+    <?= $this->fetch('scriptLibraries') ?>
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
@@ -46,7 +61,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 				<li><?= $this->Html->link(__('English'), ['controller' => 'Users', 'action' => 'setEN']); ?></li>
 				<li><?= $this->Html->link(__('German'), ['controller' => 'Users', 'action' => 'setDE']); ?></li>
                 <?php
-					$loguser = $this->request->session()->read('Auth.User');
+					$loguser = $this->request->getSession()->read('Auth.User');
 					 if ($loguser) {
 						$user = $loguser['email'];
 						echo '<li>' . $this->Html->link($user, ['controller' => 'Users', 'action' => 'view/' . $loguser['id']]) . '</li>';
@@ -64,6 +79,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('content') ?>
     </div>
     <footer>
+		<?= $this->fetch('scriptBottom')?>
     </footer>
 </body>
 </html>

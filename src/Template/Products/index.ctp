@@ -8,8 +8,14 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Product'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Types'), ['controller' => 'Types', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Type'), ['controller' => 'Types', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Products Name Translation'), ['controller' => 'Products_name_translation', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Products Name Translation'), ['controller' => 'Products_name_translation', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Orderlines'), ['controller' => 'Orderlines', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Orderline'), ['controller' => 'Orderlines', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List I18n'), ['controller' => 'I18n', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New I18n'), ['controller' => 'I18n', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
@@ -25,6 +31,7 @@
                 <th scope="col"><?= $this->Paginator->sort('price') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('type_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -34,9 +41,10 @@
                 <!--td><?= $this->Number->format($product->id) ?></td-->
                 <td><?= h($product->name) ?></td>
                 <td><?= $this->Number->format($product->user_id) ?></td>
-                <td>$ <?= $this->Number->format($product->price) ?></td>
+                <td><?= $this->Number->format($product->price) ?></td>
                 <td><?= h($product->created) ?></td>
                 <td><?= h($product->modified) ?></td>
+                <td><?= $product->has('type') ? $this->Html->link($product->type->name, ['controller' => 'Types', 'action' => 'view', $product->type->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $product->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $product->id]) ?>

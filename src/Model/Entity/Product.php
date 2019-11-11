@@ -7,14 +7,18 @@ use Cake\ORM\Entity;
  * Product Entity
  *
  * @property int $id
- * @property string $name
- * @property int $user_id
- * @property float $price
+ * @property string|null $name
+ * @property int|null $user_id
+ * @property float|null $price
  * @property \Cake\I18n\FrozenDate|null $created
  * @property \Cake\I18n\FrozenDate|null $modified
+ * @property int|null $type_id
  *
  * @property \App\Model\Entity\User[] $users
+ * @property \App\Model\Entity\Type $type
  * @property \App\Model\Entity\Orderline[] $orderlines
+ * @property \App\Model\Entity\ProductsNameTranslation $name_translation
+ * @property \App\Model\Entity\I18n[] $_i18n
  */
 class Product extends Entity
 {
@@ -33,7 +37,11 @@ class Product extends Entity
         'price' => true,
         'created' => true,
         'modified' => true,
+        'type_id' => true,
         'users' => true,
-        'orderlines' => true
+        'type' => true,
+        'orderlines' => true,
+        'name_translation' => true,
+        '_i18n' => true
     ];
 }

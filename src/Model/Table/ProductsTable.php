@@ -5,12 +5,12 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\ORM\Behavior\TranslateBehavior;
 
 /**
  * Products Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property \App\Model\Table\TypesTable&\Cake\ORM\Association\BelongsTo $Types
  * @property \App\Model\Table\OrderlinesTable&\Cake\ORM\Association\HasMany $Orderlines
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsToMany $Users
  *
@@ -36,7 +36,7 @@ class ProductsTable extends Table
     public function initialize(array $config)
     {
         parent::initialize($config);
-		
+
         $this->setTable('products');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
@@ -44,8 +44,10 @@ class ProductsTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'user_id'
+        ]);
+        $this->belongsTo('Types', [
+            'foreignKey' => 'type_id'
         ]);
         $this->hasMany('Orderlines', [
             'foreignKey' => 'product_id'
@@ -75,12 +77,12 @@ class ProductsTable extends Table
             ->scalar('name')
             ->maxLength('name', 60)
             ->requirePresence('name', 'create')
-            ->notEmptyString('name');
+			->notEmptyString('name');
 
         $validator
             ->numeric('price')
             ->requirePresence('price', 'create')
-            ->notEmptyString('price');
+			->notEmptyString('price');
 
         return $validator;
     }
@@ -95,6 +97,7 @@ class ProductsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
+        $rules->add($rules->existsIn(['type_id'], 'Types'));
 
         return $rules;
     }

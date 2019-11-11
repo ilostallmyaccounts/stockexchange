@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 15 oct. 2019 à 05:08
+-- Généré le :  mer. 16 oct. 2019 à 02:45
 -- Version du serveur :  10.1.40-MariaDB
 -- Version de PHP :  7.3.5
 
@@ -42,8 +42,6 @@ CREATE TABLE `files` (
 --
 
 INSERT INTO `files` (`id`, `name`, `path`, `created`, `modified`, `status`) VALUES
-(1, 'itop.txt', 'uploads/files/', '2019-10-14 00:27:21', '2019-10-14 00:27:21', 1),
-(2, 'e.html', 'uploads/files/', '2019-10-14 00:48:11', '2019-10-14 00:48:11', 1),
 (3, '6b0c7491d0776cf40dc0f455b937edf8.jpg', 'uploads/files/', '2019-10-14 00:52:18', '2019-10-14 00:52:18', 1),
 (4, 'YYKGVl2.jpg', 'uploads/files/', '2019-10-14 01:02:52', '2019-10-14 01:02:52', 1);
 
@@ -66,7 +64,7 @@ CREATE TABLE `groupes` (
 --
 
 INSERT INTO `groupes` (`id`, `groupname`, `file_id`, `created`, `modified`) VALUES
-(1, 'Test', 4, '2019-10-13', '2019-10-14');
+(1, 'The Group', 4, '2019-10-13', '2019-10-14');
 
 -- --------------------------------------------------------
 
@@ -88,7 +86,10 @@ CREATE TABLE `i18n` (
 --
 
 INSERT INTO `i18n` (`id`, `locale`, `model`, `foreign_key`, `field`, `content`) VALUES
-(1, 'fr_FR', 'Products', 2, 'name', 'Test (en français)');
+(1, 'fr_FR', 'products', 3, 'name', 'Le nom de mon produit en français'),
+(2, 'de_DE', 'products', 3, 'name', 'Die namm de mein produckten en deutschen'),
+(3, 'fr_FR', 'groupes', 1, 'groupname', 'Le groupe'),
+(4, 'de_DE', 'groupes', 1, 'groupname', 'Die Gruppen');
 
 -- --------------------------------------------------------
 
@@ -125,6 +126,27 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `user_id`, `date_purchase`, `created`, `modified`) VALUES
 (1, 1, '2019-10-12 23:54:00', '2019-10-12', '2019-10-12');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `phinxlog`
+--
+
+CREATE TABLE `phinxlog` (
+  `version` bigint(20) NOT NULL,
+  `migration_name` varchar(100) DEFAULT NULL,
+  `start_time` timestamp NULL DEFAULT NULL,
+  `end_time` timestamp NULL DEFAULT NULL,
+  `breakpoint` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `phinxlog`
+--
+
+INSERT INTO `phinxlog` (`version`, `migration_name`, `start_time`, `end_time`, `breakpoint`) VALUES
+(20191015205106, 'Initial', '2019-10-16 00:51:08', '2019-10-16 00:51:08', 0);
 
 -- --------------------------------------------------------
 
@@ -256,6 +278,12 @@ ALTER TABLE `orders`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Index pour la table `phinxlog`
+--
+ALTER TABLE `phinxlog`
+  ADD PRIMARY KEY (`version`);
+
+--
 -- Index pour la table `products`
 --
 ALTER TABLE `products`
@@ -304,7 +332,7 @@ ALTER TABLE `groupes`
 -- AUTO_INCREMENT pour la table `i18n`
 --
 ALTER TABLE `i18n`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `orderlines`
@@ -328,7 +356,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `users_groupes`
