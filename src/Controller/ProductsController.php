@@ -179,6 +179,6 @@ class ProductsController extends AppController
         ]);
         $this->set('types', $types);
         $this->set('_serialize', ['types']);
-		return "eee";
+		//return "eee";
     }
 }

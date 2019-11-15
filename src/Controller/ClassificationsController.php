@@ -12,6 +12,18 @@ use App\Controller\AppController;
  */
 class ClassificationsController extends AppController
 {
+	   public $paginate = [
+        'page' => 1,
+        'limit' => 10,
+        'maxLimit' => 100,
+        'fields' => [
+            'id', 'name'
+        ],
+        'sortWhitelist' => [
+            'id', 'name'
+        ]
+    ];
+	
     /**
      * Index method
      *

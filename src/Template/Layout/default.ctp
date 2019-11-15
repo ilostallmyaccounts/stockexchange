@@ -47,6 +47,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
 	
     <?= $this->fetch('scriptLibraries') ?>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
@@ -75,7 +77,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div>
     </nav>
     <?= $this->Flash->render() ?>
-    <div class="container clearfix">
+    <div id="cakephp-container" class="container clearfix">
         <?= $this->fetch('content') ?>
     </div>
     <footer>

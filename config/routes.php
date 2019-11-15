@@ -24,7 +24,7 @@ use Cake\Routing\Route\DashedRoute;
 
 use Cake\Core\Plugin;
 
-Router::extensions(['json', 'xml']);
+Router::extensions(['json', 'xml', 'ajax']);
 
 /**
  * The default class to use for all routes
@@ -50,17 +50,18 @@ Router::extensions(['json', 'xml']);
 Router::defaultRouteClass(DashedRoute::class);
 
 Router::scope('/', function (RouteBuilder $routes) {
+	
     // Register scoped middleware for in scopes.
-	$routes->setExtensions(['json', 'xml']);
-    $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware([
+	$routes->setExtensions(['json', 'xml', 'ajax']);
+    /*$routes->registerMiddleware('csrf', new CsrfProtectionMiddleware([
         'httpOnly' => true
-    ]));
+    ]));*/
 
     /**
      * Apply a middleware to the current route scope.
      * Requires middleware to be registered via `Application::routes()` with `registerMiddleware()`
      */
-    $routes->applyMiddleware('csrf');
+    //$routes->applyMiddleware('csrf');
 
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',
@@ -97,6 +98,11 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->fallbacks(DashedRoute::class);
 });
 
+Router::prefix('api', function ($routes) {
+    $routes->extensions(['json', 'xml', 'ajax']);
+	$routes->resources('Classifications');
+    $routes->fallbacks(DashedRoute::class);
+});
 /*Router::defaultRouteClass('DashedRoute');
 Router::scope('/', function (RouteBuilder $routes) {
 	$routes->connect('/email',['controller'=>'Emails','action'=>'index']);
