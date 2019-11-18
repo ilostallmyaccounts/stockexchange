@@ -24,7 +24,7 @@ use Cake\Routing\Route\DashedRoute;
 
 use Cake\Core\Plugin;
 
-Router::extensions(['json', 'xml', 'ajax']);
+Router::extensions(['json', 'xml', 'ajax', 'pdf']);
 
 /**
  * The default class to use for all routes
@@ -52,7 +52,7 @@ Router::defaultRouteClass(DashedRoute::class);
 Router::scope('/', function (RouteBuilder $routes) {
 	
     // Register scoped middleware for in scopes.
-	$routes->setExtensions(['json', 'xml', 'ajax']);
+	$routes->setExtensions(['json', 'xml', 'ajax', 'pdf']);
     /*$routes->registerMiddleware('csrf', new CsrfProtectionMiddleware([
         'httpOnly' => true
     ]));*/
@@ -99,10 +99,12 @@ Router::scope('/', function (RouteBuilder $routes) {
 });
 
 Router::prefix('api', function ($routes) {
-    $routes->extensions(['json', 'xml', 'ajax']);
+    $routes->extensions(['json', 'xml', 'ajax', 'pdf']);
 	$routes->resources('Classifications');
     $routes->fallbacks(DashedRoute::class);
 });
+
+Router::prefix('Admin', function ($routes) { $routes->fallbacks('InflectedRoute'); });
 /*Router::defaultRouteClass('DashedRoute');
 Router::scope('/', function (RouteBuilder $routes) {
 	$routes->connect('/email',['controller'=>'Emails','action'=>'index']);
@@ -110,6 +112,8 @@ Router::scope('/', function (RouteBuilder $routes) {
 	$routes->setExtensions(['json', 'xml']);
 });*/
 Plugin::routes();
+
+
 
 /**
  * If you need a different set of middleware or none at all,

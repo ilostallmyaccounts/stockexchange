@@ -1,7 +1,7 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Admin;
 
-use App\Controller\AppController;
+use App\Controller\Admin\AppController;
 
 /**
  * Classifications Controller
@@ -12,18 +12,6 @@ use App\Controller\AppController;
  */
 class ClassificationsController extends AppController
 {
-	   public $paginate = [
-        'page' => 1,
-        'limit' => 10,
-        'maxLimit' => 100,
-        'fields' => [
-            'id', 'name'
-        ],
-        'sortWhitelist' => [
-            'id', 'name'
-        ]
-    ];
-	
     /**
      * Index method
      *
@@ -43,21 +31,21 @@ class ClassificationsController extends AppController
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    /*public function view($id = null)
+    public function view($id = null)
     {
         $classification = $this->Classifications->get($id, [
-            'contain' => []
+            'contain' => ['Types']
         ]);
 
         $this->set('classification', $classification);
-    }*/
+    }
 
     /**
      * Add method
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    /*public function add()
+    public function add()
     {
         $classification = $this->Classifications->newEntity();
         if ($this->request->is('post')) {
@@ -70,7 +58,7 @@ class ClassificationsController extends AppController
             $this->Flash->error(__('The classification could not be saved. Please, try again.'));
         }
         $this->set(compact('classification'));
-    }*/
+    }
 
     /**
      * Edit method
@@ -79,7 +67,7 @@ class ClassificationsController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    /*public function edit($id = null)
+    public function edit($id = null)
     {
         $classification = $this->Classifications->get($id, [
             'contain' => []
@@ -94,7 +82,7 @@ class ClassificationsController extends AppController
             $this->Flash->error(__('The classification could not be saved. Please, try again.'));
         }
         $this->set(compact('classification'));
-    }*/
+    }
 
     /**
      * Delete method
@@ -103,7 +91,7 @@ class ClassificationsController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    /*public function delete($id = null)
+    public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
         $classification = $this->Classifications->get($id);
@@ -114,5 +102,10 @@ class ClassificationsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
-    }*/
+    }
+	
+	public function isAuthorized($user)
+    {
+	   return $user['isadmin'] === true;
+    }
 }

@@ -13,7 +13,7 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = 'StockExchange';
+$cakeDescription = '✔&nbsp;&nbsp;StockExchange';
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,11 +59,7 @@ $cakeDescription = 'StockExchange';
             </li>
         </ul>
         <div class="top-bar-section">
-            <ul class="right">
-				<li><?= $this->Html->link(__('French'), ['controller' => 'Users', 'action' => 'setFR']); ?></li>
-				<li><?= $this->Html->link(__('English'), ['controller' => 'Users', 'action' => 'setEN']); ?></li>
-				<li><?= $this->Html->link(__('German'), ['controller' => 'Users', 'action' => 'setDE']); ?></li>
-                <?php
+            <ul class="right"><?php
 					$loguser = $this->request->getSession()->read('Auth.User');
 					 if ($loguser) {
 						$user = $loguser['email'];
@@ -73,7 +69,7 @@ $cakeDescription = 'StockExchange';
 						echo '<li>' . $this->Html->link('login', ['prefix' => false, 'controller' => 'Users', 'action' => 'login']) . '</li>';
 					}
 				?>
-				<li><?= $this->Html->link(__('A propos'), ['controller' => 'Apropos', 'action' => 'index']); ?></li>
+				<li><?= $this->Html->link(__('A propos'), ['prefix' => false, 'controller' => 'Apropos', 'action' => 'index']); ?></li>
             </ul>
         </div>
     </nav>

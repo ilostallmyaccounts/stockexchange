@@ -54,6 +54,41 @@ class ProductsController extends AppController
 
         $this->set('product', $product);
     }
+	
+	public function pdf($id = null)
+	{
+		$product = $this->Products->get($id, [
+            'contain' => ['Types', 'Users', 'Orderlines',]
+        ]);
+		
+		$this->viewBuilder()->options([
+			'pdfConfig' => [
+				'engine' => 'CakePdf.WkHtmlToPdf',
+				'binary' => 'C:\wkhtmltopdf\bin',
+				'orientation' => 'portrait',
+				'filename' => 'Product_' . $id,
+				'download' => true
+			]
+		]);
+		
+        $this->set('product', $product);
+	}
+	
+	/*Configure::write('CakePdf', [
+			'engine' => 'CakePdf.WkHtmlToPdf',
+			'binary' => 'C:\wkhtmltopdf\bin',
+			'margin' => [
+				'bottom' => 15,
+				'left' => 50,
+				'right' => 30,
+				'top' => 45
+			],
+			'orientation' => 'portrait',
+			'download' => true
+		]);*/
+
+
+
 
     /**
      * Add method
