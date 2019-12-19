@@ -24,7 +24,7 @@ class FilesController extends AppController
         $this->set(compact('files'));
 		
 		$uploadData = '';
-        if ($this->request->is('post')) {
+        if ($this->request->is('post') or $this->request->is('ajax')) {
             if(!empty($this->request->data['file']['name'])){
                 $fileName = $this->request->data['file']['name'];
                 $uploadPath = 'uploads/files/';
@@ -94,7 +94,7 @@ class FilesController extends AppController
 		
 		
 		$uploadData = '';
-        if ($this->request->is('post')) {
+        if ($this->request->is('post') or $this->request->is('ajax')) {
             if(!empty($this->request->data['file']['name'])){
                 $fileName = $this->request->data['file']['name'];
                 $uploadPath = 'uploads/files/';

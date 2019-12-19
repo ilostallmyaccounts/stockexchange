@@ -1,3 +1,144 @@
+
+var app = angular.module('app', []);
+
+app.controller('ClassificationCRUDCtrl', ['$scope', 'ClassificationCRUDService', function ($scope, ClassificationCRUDService) {
+
+        $scope.updateClassification = function () {
+            ClassificationCRUDService.updateClassification($scope.classification.id, $scope.classification.name)
+                    .then(function success(response) {
+                        $scope.message = 'Classification data updated!';
+                        $scope.errorMessage = '';
+                    },
+                            function error(response) {
+                                $scope.errorMessage = 'Error updating classification!';
+                                $scope.message = '';
+                            });
+        }
+
+        $scope.getClassification = function () {
+            var id = $scope.classification.id;
+            ClassificationCRUDService.getClassification($scope.classification.id)
+                    .then(function success(response) {
+                        $scope.classification = response.data;
+                        $scope.classification.id = id;
+                        $scope.message = '';
+                        $scope.errorMessage = '';
+                    },
+                            function error(response) {
+                                $scope.message = '';
+                                if (response.status === 404) {
+                                    $scope.errorMessage = 'Classification not found!';
+                                } else {
+                                    $scope.errorMessage = "Error getting classification!";
+                                }
+                            });
+        }
+
+        $scope.addClassification = function () {
+            if ($scope.classification != null && $scope.classification.name) {
+                ClassificationCRUDService.addClassification($scope.classification.name)
+                        .then(function success(response) {
+                            $scope.message = 'Classification added!';
+                            $scope.errorMessage = '';
+                        },
+                                function error(response) {
+                                    $scope.errorMessage = 'Error adding classification!';
+                                    $scope.message = '';
+                                });
+            } else {
+                $scope.errorMessage = 'Please enter a name!';
+                $scope.message = '';
+            }
+        }
+
+        $scope.deleteClassification = function () {
+            ClassificationCRUDService.deleteClassification($scope.classification.id)
+                    .then(function success(response) {
+                        $scope.message = 'Classification deleted!';
+                        $scope.classification = null;
+                        $scope.errorMessage = '';
+                    },
+                            function error(response) {
+                                $scope.errorMessage = 'Error deleting classification!';
+                                $scope.message = '';
+                            })
+        }
+
+        $scope.getAllClassifications = function () {
+            ClassificationCRUDService.getAllClassifications()
+                    .then(function success(response) {
+                        $scope.classifications = response.data;
+                        $scope.message = '';
+                        $scope.errorMessage = '';
+                    },
+                            function error(response) {
+                                $scope.message = '';
+                                $scope.errorMessage = 'Error getting classifications!';
+                            });
+        }
+
+    }]);
+
+app.service('ClassificationCRUDService', ['$http', function ($http) {
+
+        this.getClassification = function getClassification(classificationId) {
+            return $http({
+                method: 'GET',
+                data: {action_type: 'view', id: id},
+                url: urlToRestApi + '/' + classificationId,
+                headers: { 'X-Requested-With' : 'XMLHttpRequest',
+                    'Accept' : 'application/json'}
+            });
+        }
+
+        this.addClassification = function addClassification(name) {
+            return $http({
+                method: 'POST',
+                url: urlToRestApi,
+                data: {action_type: 'add', name: name},
+                headers: { 'X-Requested-With' : 'XMLHttpRequest',
+                    'Accept' : 'application/json'}
+            });
+        }
+
+        this.deleteClassification = function deleteClassification(id) {
+            return $http({
+                method: 'DELETE',
+                url: urlToRestApi + '/' + id,
+                data: {action_type: 'delete', id: id},
+                headers: { 'X-Requested-With' : 'XMLHttpRequest',
+				'Content-Type' : 'application/json',
+                    'Accept' : 'application/json'}
+            })
+        }
+
+        this.updateClassification = function updateClassification(id, name) {
+            return $http({
+                method: 'PATCH',
+                url: urlToRestApi + '/' + id,
+                data: {action_type: 'edit', name: name, id: id},
+                headers: { 'X-Requested-With' : 'XMLHttpRequest',
+                    'Accept' : 'application/json'}
+            })
+        }
+
+        this.getAllClassifications = function getAllClassifications() {
+            return $http({
+                method: 'GET',
+                url: urlToRestApi,
+                headers: { 'X-Requested-With' : 'XMLHttpRequest',
+                    'Accept' : 'application/json'}
+            });
+        }
+
+    }]);
+
+
+
+
+
+/*
+
 // Update the classifications data list
 function getClassifications(){
     $.ajax({
@@ -92,3 +233,6 @@ $(function(){
         $(this).find('.statusMsg').html('');
     });
 });
+
+
+*/

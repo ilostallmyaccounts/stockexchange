@@ -144,15 +144,17 @@ class ClassificationsController extends AppController
     public function delete($id = null)
     {
 		//if ($this->request->data('action_type') == "index") echo "DELETE LOOOOOOL";
-		//die("delete " . $this->request->data('action_type') . $this->request->data('id'));
+		//die("delete " . $this->request->data('action_type') . ','. $this->request->data('id'));
 		if ($this->request->data('action_type') != 'delete') {
 			$this->index();
 		} else {
 			$this->request->allowMethod(['post', 'delete']);
 			$classification = $this->Classifications->get($id);
 			if ($this->Classifications->delete($classification)) {
+				die("yay");
 				//$this->Flash->success(__('The classification has been deleted.'));
 			} else {
+				die("nay");
 				//$this->Flash->error(__('The classification could not be deleted. Please, try again.'));
 			}
 		}
