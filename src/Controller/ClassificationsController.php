@@ -115,4 +115,17 @@ class ClassificationsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }*/
+	
+    public function getClassifications() {
+        $this->autoRender = false; // avoid to render view
+
+        $classifications = $this->Classifications->find('all', [
+            'contain' => ['Types'],
+        ]);
+
+        $classificationsJ = json_encode($classifications);
+        $this->response->type('json');
+        $this->response->body($classificationsJ);
+
+    }
 }

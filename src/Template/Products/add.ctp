@@ -1,7 +1,9 @@
 <?php
 $urlToLinkedListFilter = $this->Url->build([
-    "controller" => "Types",
-    "action" => "getByClassification",
+    //"controller" => "Types",
+    //"action" => "getByClassification",
+	"controller" => "Classifications",
+    "action" => "getClassifications",
     "_ext" => "json"
 ]);
 echo $this->Html->scriptBlock('var urlToLinkedListFilter = "' . $urlToLinkedListFilter . '";', ['block' => true]);
@@ -29,16 +31,36 @@ echo $this->Html->script('Products/add', ['block' => 'scriptBottom']);
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="products form large-9 medium-8 columns content">
+<div class="products form large-9 medium-8 columns content" ng-app="linkedlists" ng-controller="classificationsController">
     <?= $this->Form->create($product) ?>
     <fieldset>
-        <legend><?= __('Add Product') ?></legend>
+        <legend><?= __('Add Product') ?></legend><div>
+            Classification: 
+            <select name="classification_id"
+                    id="classification-id" 
+                    ng-model="classification" 
+                    ng-options="classification.name for classification in classifications track by classification.id"
+                    >
+                <option value=''>Select</option>
+            </select>
+        </div>
+        <div>
+            Type: 
+            <select name="type_id"
+                    id="type-id" 
+                    ng-disabled="!classification" 
+                    ng-model="type"
+                    ng-options="type.name for type in classification.types track by type.id"
+                    >
+                <option value=''>Select</option>
+            </select>
+        </div>
         <?php
             echo $this->Form->control('name');
             //echo $this->Form->control('user_id');
             echo $this->Form->control('price');
-			echo $this->Form->control('Classification_id', ['options' => $classification_id]);
-            echo $this->Form->control('type_id', ['options' => $types]);
+			//echo $this->Form->control('Classification_id', ['options' => $classification_id]);
+            //echo $this->Form->control('type_id', ['options' => $types]);
             echo $this->Form->control('users._ids', ['options' => $users]);
         ?>
     </fieldset>

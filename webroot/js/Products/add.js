@@ -1,3 +1,15 @@
+var app = angular.module('linkedlists', []);
+
+app.controller('classificationsController', function ($scope, $http) {
+    // l'url vient de add.ctp
+    $http.get(urlToLinkedListFilter).then(function (response) {
+        $scope.classifications = response.data;
+    });
+});
+
+
+
+/*
 $(document).ready(function () {
     // The path to action from CakePHP is in urlToLinkedListFilter 
     $('#classification-id').on('change', function () {
@@ -22,5 +34,5 @@ $(document).ready(function () {
         }
     });
 });
-
+*/
 
