@@ -87,7 +87,8 @@ app.service('ClassificationCRUDService', ['$http', function ($http) {
                 data: {action_type: 'view', id: id},
                 url: urlToRestApi + '/' + classificationId,
                 headers: { 'X-Requested-With' : 'XMLHttpRequest',
-                    'Accept' : 'application/json'}
+                    'Accept' : 'application/json',
+					'Authorization': 'Bearer ' + token}
             });
         }
 
@@ -97,7 +98,8 @@ app.service('ClassificationCRUDService', ['$http', function ($http) {
                 url: urlToRestApi,
                 data: {action_type: 'add', name: name},
                 headers: { 'X-Requested-With' : 'XMLHttpRequest',
-                    'Accept' : 'application/json'}
+                    'Accept' : 'application/json',
+					'Authorization': 'Bearer ' + token}
             });
         }
 
@@ -108,7 +110,8 @@ app.service('ClassificationCRUDService', ['$http', function ($http) {
                 data: {action_type: 'delete', id: id},
                 headers: { 'X-Requested-With' : 'XMLHttpRequest',
 				'Content-Type' : 'application/json',
-                    'Accept' : 'application/json'}
+                    'Accept' : 'application/json',
+					'Authorization': 'Bearer ' + token}
             })
         }
 
@@ -118,7 +121,8 @@ app.service('ClassificationCRUDService', ['$http', function ($http) {
                 url: urlToRestApi + '/' + id,
                 data: {action_type: 'edit', name: name, id: id},
                 headers: { 'X-Requested-With' : 'XMLHttpRequest',
-                    'Accept' : 'application/json'}
+                    'Accept' : 'application/json',
+					'Authorization': 'Bearer ' + token}
             })
         }
 
@@ -127,7 +131,18 @@ app.service('ClassificationCRUDService', ['$http', function ($http) {
                 method: 'GET',
                 url: urlToRestApi,
                 headers: { 'X-Requested-With' : 'XMLHttpRequest',
-                    'Accept' : 'application/json'}
+                    'Accept' : 'application/json',
+					'Authorization': 'Bearer ' + token}
+            });
+        }
+
+        this.changePW = function changePW() {
+            return $http({
+                method: 'POST',
+                url: urlToRestApi,
+                headers: { 'X-Requested-With' : 'XMLHttpRequest',
+                    'Accept' : 'application/json',
+					'Authorization': 'Bearer ' + token}
             });
         }
 

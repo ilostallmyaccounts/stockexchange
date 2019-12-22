@@ -46,6 +46,7 @@ class User extends Entity
         'modified' => true,
         'orders' => true,
         'products' => true,
+        'active' => true,
         'groupes' => true
     ];
 
@@ -60,10 +61,10 @@ class User extends Entity
 	
     protected function _setPassword($value)
     {
-        if (strlen($value)) {
+        //if (strlen($value)) {
             $hasher = new DefaultPasswordHasher();
 
             return $hasher->hash($value);
-        }
+        //}
     }
 }

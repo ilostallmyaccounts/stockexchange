@@ -107,6 +107,10 @@ class UsersTable extends Table
         $validator
             ->boolean('isadmin')
             ->notEmptyString('isadmin');
+			
+        $validator
+            ->boolean('active')
+            ->notEmptyString('active');
 
         $validator
             ->dateTime('joindate')
