@@ -67,7 +67,7 @@ app.controller('ClassificationCRUDCtrl', ['$scope', 'ClassificationCRUDService',
         $scope.getAllClassifications = function () {
             ClassificationCRUDService.getAllClassifications()
                     .then(function success(response) {
-                        $scope.classifications = response.data;
+                        $scope.classifications = response.data.classifications;
                         $scope.message = '';
                         $scope.errorMessage = '';
                     },

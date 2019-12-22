@@ -19,7 +19,7 @@
     </ul>
 </nav>
 <div class="users index large-9 medium-8 columns content">
-	<p><strong style="color:red;">*</strong>&nbsp;&nbsp;<small style="font-size:14px;color:#ccc;font-style:italic;">Les informations pour le TP2 se trouvent à la suite de celles pour le TP1</small></p>
+	<p><strong style="color:red;">*</strong>&nbsp;&nbsp;<small style="font-size:14px;color:#ccc;font-style:italic;">Les informations pour le TP3 se trouvent à la suite de celles pour les TP 1 et 2</small></p>
 	<h1>A propos</h1>
 	<h2>Informations générales</h2>
     <p>Gabriel GR - 420-5b7 MO Applications internet. Automne 2018, Collège Montmorency.</p>
@@ -44,8 +44,20 @@
 		<li><a href="/stockexchange/api/classifications">Api json</a> (accès direct, le lien pour la monopage est ci-dessous)</li>
 		<li><a href="/stockexchange/classifications">Monopage</a></li>
 		<li><a href="/stockexchange/admin/types">Routage admin (tables Types) + Menu déroulant Bootstrap</a> <strong>(assurez-vous d'être connecté en tant qu'administrateur : "root@jr.jr", "p@ssW0RD")</strong></li>
-		<li><a href="/stockexchange/products/pdf/1.pdf">Téléchargement PDF</a> (Table Products; accessible à partir du menu ne navigation à gauche)</li>
+		<li><a href="/stockexchange/products/pdf/1.pdf">Téléchargement PDF</a> (Table Products; accessible à partir du menu de navigation à gauche)</li>
 	</ul>
+	<br />
+	<h2>Informations spécifiques au travail pratique 3</h2>
+	<p>Fonctionnalités :</p>
+	<ul>
+		<li><a href="/stockexchange/classifications">Monopage</a></li>
+		<li><a href="/stockexchange/files">Fichiers (avec dropzone)</a></li>
+		<li><a href="/stockexchange/products/add">Liste liées</a></li>
+	</ul>
+	<p><strong>Fonctionnement de la monopage :</strong> Entrer un nom d'usager et un mot de passe ("jr@jr.jr" + "p@ssW0RD", ou "root@jr.jr" + "p@ssW0RD"), cocher le captcha, puis cliquer sur le bouton "Login".</p>
+	<p>Pour changer le mot de passe : entrer le nouveau mot de passe dans la boîte de texte prévue à cet effet er cliquer sur le bouton "Changer". Ceci terminera la session et il faudra entrer les nouvelles informations de connexion pour continuer</p>
+	<p>Pour se déconnecter : Cliquer sur le bouton "Logout".</p>
+	<p>Pour manipuler les classifications : Entrer l'ID et/ou le nom de la classification (applicables selon l'action), puis sélectionner l'action sous les champs.</p>
 	<h2>Diagramme de phpMyAdmin</h2>
 	<img src="webroot/img/diagramme.png" alt="Diagramme des relations" />
 </div>

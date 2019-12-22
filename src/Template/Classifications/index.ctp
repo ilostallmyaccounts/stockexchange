@@ -116,10 +116,10 @@ logout();
 			</tr>
 		</table>
 		<br /> <br /> 
-		<a ng-click="getClassification(classification.id)">Get Classification</a> 
-		<a ng-click="updateClassification(classification.id, classification.name)">Update Classification</a> 
-		<a ng-click="addClassification(classification.name)">Add Classification</a> 
-		<a ng-click="deleteClassification(classification.id)">Delete Classification</a>
+		<a ng-click="getClassification(classification.id)">Get Classification</a> <br/>
+		<a ng-click="updateClassification(classification.id, classification.name)">Update Classification</a> <br/>
+		<a ng-click="addClassification(classification.name)">Add Classification</a> <br/>
+		<a ng-click="deleteClassification(classification.id)">Delete Classification</a> <br/>
 
 		<br /> <br />
 
@@ -127,9 +127,9 @@ logout();
 		<br /> 
 		<a ng-click="getAllClassifications()">Get all Classifications</a><br /> 
 		<br /> <br />
-		<div ng-repeat="classification in classifications">
-			{{classification.name}}
+		<div ng-app="app" ng-repeat="classification in classifications">
+			Classification # {{ classification.id }} : {{ classification.name }}
 		</div>
-		<!-- pre ng-show='classifications'>{{classifications | json }}</pre-->
+		<!--pre ng-show='classifications'>{{classifications | json }}</pre-->
 	</div>
 </div>
